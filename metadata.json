@@ -1,0 +1,7 @@
+{
+  "name": "Koe-Master: Japanese Pronunciation Coach",
+  "description": "An AI-powered Japanese pronunciation and speaking coach for non-native speakers. Upload or record audio to get detailed feedback on intonation, clarity, and accuracy using Gemini.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
