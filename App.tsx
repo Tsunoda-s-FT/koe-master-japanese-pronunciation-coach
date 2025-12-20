@@ -28,7 +28,7 @@ const App: React.FC = () => {
     model: 'gemini-1.5-flash-latest',
   });
   const [audioResetSignal, setAudioResetSignal] = useState(0);
-  const { speak } = useTTS();
+  const { speak, isLoading: isSpeaking } = useTTS();
 
   // 初回アクセス時にゲストならモーダルを表示
   useEffect(() => {
@@ -237,12 +237,20 @@ const App: React.FC = () => {
                 {state.targetText && (
                   <div className="flex justify-end">
                     <button
-                      onClick={() => speak(state.targetText)}
-                      className="text-indigo-600 hover:text-indigo-700 font-bold text-sm flex items-center gap-1 bg-indigo-50 px-3 py-1.5 rounded-xl transition-all"
+                      disabled={isSpeaking}
+                      onClick={() => speak(state.targetText, 'ja')}
+                      className="text-indigo-600 hover:text-indigo-700 font-bold text-sm flex items-center gap-1 bg-indigo-50 px-3 py-1.5 rounded-xl transition-all disabled:opacity-50"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.414 0A5.982 5.982 0 0115 10a5.982 5.982 0 01-1.757 4.243 1 1 0 01-1.414-1.414A3.982 3.982 0 0013 10a3.982 3.982 0 00-1.172-2.828a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
+                      {isSpeaking ? (
+                        <svg className="animate-spin h-4 w-4 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.414 0A5.982 5.982 0 0115 10a5.982 5.982 0 01-1.757 4.243 1 1 0 01-1.414-1.414A3.982 3.982 0 0013 10a3.982 3.982 0 00-1.172-2.828a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      )}
                       {t.listen}
                     </button>
                   </div>
