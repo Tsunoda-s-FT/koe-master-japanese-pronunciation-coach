@@ -9,6 +9,7 @@ import { useAuth } from './contexts/AuthContext';
 import { AuthGuard } from './components/AuthGuard';
 import { AuthModal } from './components/AuthModal';
 import { auth } from './lib/firebase';
+import { useTTS } from './hooks/useTTS';
 
 const App: React.FC = () => {
   const { status, user, remainingHours } = useAuth();
@@ -24,9 +25,10 @@ const App: React.FC = () => {
     isTranslating: false,
     translationLang: null,
     feedback: null,
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-1.5-flash-latest',
   });
   const [audioResetSignal, setAudioResetSignal] = useState(0);
+  const { speak } = useTTS();
 
   // 初回アクセス時にゲストならモーダルを表示
   useEffect(() => {
@@ -232,6 +234,19 @@ const App: React.FC = () => {
                   placeholder={t.placeholder_text}
                   className="w-full min-h-[120px] p-5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-japanese text-xl leading-relaxed"
                 />
+                {state.targetText && (
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => speak(state.targetText)}
+                      className="text-indigo-600 hover:text-indigo-700 font-bold text-sm flex items-center gap-1 bg-indigo-50 px-3 py-1.5 rounded-xl transition-all"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.414 0A5.982 5.982 0 0115 10a5.982 5.982 0 01-1.757 4.243 1 1 0 01-1.414-1.414A3.982 3.982 0 0013 10a3.982 3.982 0 00-1.172-2.828a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                      {t.listen}
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 

@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { FeedbackData, AppLanguage } from '../types';
 import { UI_STRINGS } from '../constants';
+import { useTTS } from '../hooks/useTTS';
 
 interface FeedbackViewProps {
   data: FeedbackData;
@@ -12,6 +12,7 @@ interface FeedbackViewProps {
 export const FeedbackView: React.FC<FeedbackViewProps> = ({ data, uiLang, showTranslation }) => {
   const t = UI_STRINGS[uiLang];
   const translationEnabled = Boolean(showTranslation && uiLang !== 'ja');
+  const { speak } = useTTS();
 
   const getScoreColor = (score: number) => {
     if (score >= 85) return 'text-emerald-600 bg-emerald-50 border-emerald-100';
@@ -83,6 +84,18 @@ export const FeedbackView: React.FC<FeedbackViewProps> = ({ data, uiLang, showTr
                   {item.word}
                 </div>
                 <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-slate-800 font-bold">{item.word}</p>
+                    <button
+                      onClick={() => speak(item.word)}
+                      className="text-indigo-600 hover:text-indigo-700 p-1.5 rounded-lg hover:bg-indigo-50 transition-all"
+                      title={t.listen}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.414 0A5.982 5.982 0 0115 10a5.982 5.982 0 01-1.757 4.243 1 1 0 01-1.414-1.414A3.982 3.982 0 0013 10a3.982 3.982 0 00-1.172-2.828a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
                   <p className="text-slate-800 mb-1">{item.advice}</p>
                   {translationEnabled && item.translatedAdvice && (
                     <p className="text-slate-500 text-sm italic">{item.translatedAdvice}</p>

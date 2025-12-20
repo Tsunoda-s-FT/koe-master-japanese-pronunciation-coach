@@ -1,9 +1,8 @@
+export type AppLanguage = "ja" | "en" | "zh" | "ko";
 
-export type AppLanguage = 'ja' | 'en' | 'zh' | 'ko';
+export type PracticeMode = "text" | "free";
 
-export type PracticeMode = 'text' | 'free';
-
-export type SkillLevel = 'beginner' | 'intermediate' | 'advanced';
+export type SkillLevel = "beginner" | "intermediate" | "advanced";
 
 export type GeminiModel = 'gemini-3-flash-preview' | 'gemini-3-pro-preview';
 

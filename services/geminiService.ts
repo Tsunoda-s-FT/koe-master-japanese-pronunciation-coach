@@ -50,7 +50,7 @@ export const analyzePronunciation = async (
     Analysis Focus:
     1. Clarity of individual phonemes (mora sounds).
     2. Correct use of long vowels (長音), double consonants (促音), and n-sound (撥音).
-    3. Pitch accent (高低アクセント) and intonation flow.
+    3. Pitch accent (高低アクセント) - Specify using standardized notation (e.g., H/L for high/low or number based type like 0/1/2/3).
     4. Naturalness of rhythm and speed.
 
     Scoring Guidance (align score with the learner's level):
@@ -60,7 +60,8 @@ export const analyzePronunciation = async (
 
     Output Language:
     - Provide all feedback fields in Japanese only (translation is handled separately).
-    - If the speaker is a beginner, focus on basic clarity. If advanced, focus on natural pitch and nuance.`;
+    - If the speaker is a beginner, focus on basic clarity. If advanced, focus on natural pitch and nuance.
+    - For pitch accent feedback, use visual markers like 'H/L' or arrows where possible to make it intuitive.`;
 
   const response = await ai.models.generateContent({
     model: modelName,

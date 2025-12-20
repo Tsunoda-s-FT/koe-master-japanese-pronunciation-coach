@@ -29,7 +29,8 @@ export const UI_STRINGS: Record<AppLanguage, any> = {
     reanalyze: '再評価',
     translate_btn: '翻訳',
     translating: '翻訳中...',
-    reset: 'やり直す'
+    reset: 'やり直す',
+    listen: 'お手本を聞く'
   },
   en: {
     title: 'Koe-Master',
@@ -58,7 +59,8 @@ export const UI_STRINGS: Record<AppLanguage, any> = {
     reanalyze: 'Re-analyze',
     translate_btn: 'Translate',
     translating: 'Translating...',
-    reset: 'Reset'
+    reset: 'Reset',
+    listen: 'Listen'
   },
   zh: {
     title: 'Koe-Master',
@@ -87,7 +89,8 @@ export const UI_STRINGS: Record<AppLanguage, any> = {
     reanalyze: '重新分析',
     translate_btn: '翻译',
     translating: '翻译中...',
-    reset: '重置'
+    reset: '重置',
+    listen: '收听示范'
   },
   ko: {
     title: 'Koe-Master',
@@ -116,6 +119,7 @@ export const UI_STRINGS: Record<AppLanguage, any> = {
     reanalyze: '재분석',
     translate_btn: '번역',
     translating: '번역 중...',
-    reset: '초기화'
+    reset: '초기화',
+    listen: '모범 듣기'
   }
 };
