@@ -25,7 +25,7 @@ const App: React.FC = () => {
     isTranslating: false,
     translationLang: null,
     feedback: null,
-    model: 'gemini-1.5-flash-latest',
+    model: 'gemini-3-flash-preview',
   });
   const [audioResetSignal, setAudioResetSignal] = useState(0);
   const { speak, isLoading: isSpeaking } = useTTS();
